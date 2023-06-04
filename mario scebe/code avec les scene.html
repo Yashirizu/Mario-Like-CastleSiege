@@ -56,12 +56,13 @@
         var swordactive = false
         var attackhammer;
         var porte;
-        var block;
+        var caisse;
         var balcon;
         var equipe = 'paladin sword';
+        var distance
         
 
-        class tuto extends Phaser.Scene {
+        class tuto extends Phaser.Scene {500
             constructor() {
                 super('tuto');
             }
@@ -83,8 +84,8 @@
                 this.load.spritesheet('ennemy', 'assets/ennemis.png',
                     { frameWidth: 360, frameHeight: 280 });
 
-                this.load.spritesheet('Heavyennemy', 'assets/red-armor.png',
-                    { frameWidth: 500, frameHeight: 600 });
+                this.load.spritesheet('Heavyennemy', 'assets/troll.png',
+                    { frameWidth: 500, frameHeight: 550 });
 
                 this.load.spritesheet('epée', 'assets/epée.png',
                     { frameWidth: 48, frameHeight: 48 });
@@ -107,7 +108,7 @@
                 platforms.create(50, 150, 'ground');
                 platforms.create(750, 220, 'ground'); //en haut à droite
                 //platforms.create(1200,600,'ground')
-                platforms.create(700, 700, 'ground')
+                //platforms.create(700, 700, 'ground')
 
 
 
@@ -425,7 +426,9 @@
         }
 //////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
-/////////////////////    LEVEL 1 /////////////////////////////////////
+/////////////////////      LEVEL 1     ///////////////////////////////
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
 
         class level1 extends Phaser.Scene {
             constructor() {
@@ -435,13 +438,13 @@
 
                 this.load.image('scene1', 'assets/Level1-Mariolike.png');
                 this.load.image('ground', 'assets/platform.png');
-                this.load.image('block', 'assets/caisse.png');
+                this.load.image('caisse', 'assets/caisse.png');
                 this.load.spritesheet('paladin', 'assets/sprite-paladin_05.png',
                     { frameWidth: 250, frameHeight: 239 });
                 this.load.spritesheet('ennemy', 'assets/ennemis.png',
                     { frameWidth: 360, frameHeight: 280 });
-                this.load.spritesheet('Heavyennemy', 'assets/red-armor.png',
-                    { frameWidth: 500, frameHeight: 600 });
+                this.load.spritesheet('Heavyennemy', 'assets/red-troll.png',
+                    { frameWidth: 500, frameHeight: 550 });
                 this.load.spritesheet('epée', 'assets/epée.png',
                     { frameWidth: 48, frameHeight: 48 });
                 this.load.spritesheet('hammer', 'assets/hammer.png',
@@ -461,19 +464,42 @@
 
 
                 this.add.image(400,400,'fond').setScale(6,2);
-                platforms = this.physics.add.staticGroup();
-                // (hauteur puis gauche droite)
-                //////////// Sol //////////
-                platforms.create(410, 1200, 'ground').setScale(2).refreshBody(); // plancher
-                platforms.create(910, 1200, 'ground').setScale(2).refreshBody();
-                platforms.create(1410, 1200, 'ground').setScale(2).refreshBody();
-                platforms.create(1910, 1200, 'ground').setScale(2).refreshBody();
-                platforms.create(2000,1200,'ground').setScale(2).refreshBody();
-                platforms.create(2500,1200,'ground').setScale(2).refreshBody();
-                platforms.create(3000,1200,'ground').setScale(2).refreshBody();
-                platforms.create(3500,590,'ground').setScale(2).refreshBody();// changer de place
-                platforms.create(4000,940,'ground').setScale(2).refreshBody();
 
+                platforms = this.physics.add.staticGroup();
+                
+
+                //////////// Sol //////////
+                platforms.create(410, 1200, 'ground').setScale(2).refreshBody();// plancher
+                platforms.create(910, 1200, 'ground').setScale(2).refreshBody();//plancher
+                platforms.create(1410, 1200,'ground').setScale(2).refreshBody();//plancher
+                platforms.create(1910, 1200,'ground').setScale(2).refreshBody();//plancher
+                platforms.create(2000,1200,'ground').setScale(2).refreshBody();//plancher
+                platforms.create(2500,1200,'ground').setScale(2).refreshBody();//plancher
+                platforms.create(3000,1200,'ground').setScale(2).refreshBody();//plancher
+                platforms.create(3500,1200,'ground').setScale(2).refreshBody();//plancher
+                platforms.create(4000,1200,'ground').setScale(2).refreshBody();//plancher
+                
+
+
+                //////////// Toits //////////
+
+                platforms.create(1010,200,'ground').setScale(1.4).refreshBody();// maison 1 (toit)
+                platforms.create(1010,250,'ground').setScale(1.6).refreshBody();// maison 1
+
+                platforms.create(2200,210,'ground').setScale(1.6).refreshBody();// Maison 2 (toit)
+                platforms.create(2225,260,'ground').setScale(1.8).refreshBody();//
+                platforms.create(2250,210,'ground').setScale(1.6).refreshBody();// 
+                platforms.create(2250,260,'ground').setScale(1.8).refreshBody();//
+
+                platforms.create(3300,200,'ground').setScale(1.6).refreshBody();// Maison 3 (toit)
+                platforms.create(3300,250,'ground').setScale(1.8).refreshBody();//
+                platforms.create(3350,200,'ground').setScale(1.6).refreshBody();// 
+                platforms.create(3350,250,'ground').setScale(1.8).refreshBody();//
+
+                platforms.create(4640,200,'ground').setScale(1.6).refreshBody();// Maison 4 (oit)
+                platforms.create(4610,250,'ground').setScale(1.8).refreshBody();//
+
+                
                 //////////// BALCON //////////
                 platforms.create(1400,510,'ground').setScale(0.4).refreshBody();//balcon ok
                 platforms.create(1782, 355, 'ground').setScale(0.4).refreshBody();//balcon ok
@@ -483,53 +509,46 @@
                 platforms.create(3785, 640, 'ground').setScale(0.4).refreshBody();//balcon ok
                 platforms.create(4193, 395, 'ground').setScale(0.4).refreshBody();//balcon ok
                 platforms.create(4183, 800, 'ground').setScale(0.4).refreshBody();//balcon ok
-
-
-                platforms.create(675, 250, 'ground');//changer de place
-
-                platforms.create(1450,250,'ground');//
-                platforms.create(1535,250,'ground');//
-                platforms.create(1950,250,'ground');//
-                platforms.create(2150,250,'ground');//
-                platforms.create(2265,250,'ground');//
-                platforms.create(3050,250,'ground');//
-
-
-                block = this.physics.add.staticGroup();
-                ///// à retirer apres test
-                platforms.create(500,450,'ground');
-                             
-                //block.setImmovable(true);
+                platforms.create(1407, 929, 'ground').setScale(0.4).refreshBody();//balcon ok
+                platforms.create(2675,940, 'ground').setScale(0.4).refreshBody();// balcon ok
                 
-                platforms.create(1500,200,'ground');
-                platforms.create(2500,200,'ground');
-                platforms.create(2000,200,'ground');
-                platforms.create(1000,200,'ground');
-            
+                ///// à retirer apres test
+
+                platforms.create(400,350,'ground');                       
+                                
+                caisse = this.physics.add.staticGroup();
+                caisse.create(2200, 900, 'caisse').setScale(1).refreshBody();// blocage maison
+                caisse.create(2200, 400, 'caisse').setScale(1).refreshBody();
+
+
                 this.add.image(2250, 200, 'scene1').setScale(0.75);
 
+                //////////// Caisse //////////
+
                 
-                block.create(1350,845,'block').setScale(0.2).refreshBody();
-                block.create(1350,755,'block').setScale(0.2).refreshBody();
-                block = this.physics.add.image(350, 400);
-                this.physics.add.collider(block, platforms);
-                this.physics.add.collider(block, ennemy, null, this);
-                this.physics.add.collider(block, player, null, this);
-                this.physics.add.collider(block,block,null,this);
-                block.setBounce(0.1);
-                block.setCollideWorldBounds(false);
-                block.allowGravity = true;
-                block.setImmovable (true);
+                
+                
+                
+                caisse.create(1910, 1060, 'caisse').setScale(0.2).refreshBody();
+                caisse.create(1910, 1150, 'caisse').setScale(0.2).refreshBody();
+                // TEST //
+                caisse.create(1910, 980, 'caisse').setScale(0.2).refreshBody();
+                caisse.create(1910, 900, 'caisse').setScale(0.2).refreshBody();
+
+                caisse.create(3900,1100,'caisse').setScale(0.2).refreshBody();
+                
 
               
-                player = this.physics.add.sprite(300, 200, 'paladin sword').setScale(0.75);
-
-                
+                player = this.physics.add.sprite(300, 950, 'paladin sword').setScale(0.75);             
 
                 player.setBounce(0.2);
                 player.setCollideWorldBounds(true);
                 this.physics.add.collider(player, platforms);
+                this.physics.add.collider(player,caisse);
+
+
                 this.physics.add.collider(porte,platforms);
+                
 
                 this.cameras.main.setBounds(0, 0, 5500, 3220);
                 // ancrage de la caméra sur le joueur
@@ -616,7 +635,7 @@
                 
                 
 
-                ennemy = this.physics.add.sprite(750, 400, 'ennemy').setScale(0.5);
+                ennemy = this.physics.add.sprite(250, 200, 'ennemy').setScale(0.5);
 
                 ennemy.setSize(250, 250, true);
                 this.physics.add.collider(ennemy, platforms);
@@ -626,7 +645,7 @@
                 ennemy.allowGravity = true;
                 //this.ennemy.vivant=true
 
-                Heavyennemy = this.physics.add.sprite(750, 400, 'Heavyennemy');
+                Heavyennemy = this.physics.add.sprite(250, 200, 'Heavyennemy');
 
                 this.physics.add.collider(Heavyennemy, platforms);
                 this.physics.add.collider(player, Heavyennemy, null, this);
@@ -783,17 +802,19 @@
 
                 this.load.image('LVL2','assets/lv2 plan principal.png');
                 this.load.image('Arche','assets/LV2 arche.png');
+                this.load.image('ground','assets/platform.png');
+                this.load.image('caisse','assets/caisse.png');
+
                 this.load.spritesheet('perso', 'assets/perso.png',
                     { frameWidth: 32, frameHeight: 48 });
                 this.load.spritesheet('paladin sword','assets/sprite-paladin_epee_01.png',
                     {frameWidth:250, frameHeight:236});
                 this.load.spritesheet('paladin hammer','assets/sprite-paladin_marteau_01.png',
-                    {frameWidth:260, frameHeight:236});
-                
-                this.load.spritesheet('ennemy', 'assets/ennemis.png',
-                    { frameWidth: 360, frameHeight: 280 });
-                this.load.spritesheet('Heavyennemy', 'assets/red-armor.png',
-                    { frameWidth: 500, frameHeight: 600 });
+                    {frameWidth:260, frameHeight:236});                
+                this.load.spritesheet('ennemy', 'assets/Oeil.png',
+                    { frameWidth: 800, frameHeight: 600 });
+                this.load.spritesheet('Heavyennemy', 'assets/troll.png',
+                    { frameWidth: 500, frameHeight: 550 });
                 this.load.spritesheet('epée', 'assets/epée.png',
                     { frameWidth: 48, frameHeight: 48 });
                 this.load.spritesheet('hammer', 'assets/hammer.png',
@@ -801,24 +822,62 @@
 
             }
             create() {
-                this.physics.world.setBounds(200,0,5000,2400);
-                
+                this.physics.world.setBounds(200,0,4800,2400);
+
+                caisse= this.physics.add.staticGroup();
+
+                caisse.create(3845,990,'caisse').setScale(1.5).refreshBody()
+                caisse.create(4100,570,'caisse').setScale(0.6).refreshBody()
+
                 this.add.image(2600,1200,'LVL2').setScale(0.75)
-                platforms = this.physics.add.staticGroup();
-                // (hauteur puis gauche droite)
-                platforms.create(410, 890, 'ground').setScale(2).refreshBody(); // plancher
-                platforms.create(1100, 890, 'ground').setScale(2).refreshBody();
-                platforms.create(1600, 890, 'ground').setScale(2).refreshBody();
-                platforms.create(1200, 890, 'ground').setScale(2).refreshBody();
-                platforms.create(500, 400, 'ground');
-                platforms.create(150, 150, 'ground');
-                platforms.create(750, 220, 'ground'); //en haut à droite
-                //platforms.create(1200,600,'ground')
-                platforms.create(700, 700, 'ground')
+                
+                ///////////////////     SOL DU NIVEAU    ////////////////////
+                platforms= this.physics.add.staticGroup();
+                platforms.create(600, 2400, 'ground').setScale(2).refreshBody(); // plancher
+                platforms.create(1400, 2400, 'ground').setScale(2).refreshBody();
+                platforms.create(2100, 2400, 'ground').setScale(2).refreshBody();
+                platforms.create(2800, 2400, 'ground').setScale(2).refreshBody()
+                platforms.create(3500, 2400, 'ground').setScale(2).refreshBody();
+                platforms.create(4200, 2400, 'ground').setScale(2).refreshBody();
+                platforms.create(4900, 2400, 'ground').setScale(2).refreshBody();
+                ///////////////     Batiment Gauche      //////////////////////
+                platforms.create(750,500, 'ground').setScale(2.5).refreshBody(); // (toit)
+                platforms.create(750,890, 'ground').setScale(2.5).refreshBody(); // (2e étage)
+                platforms.create(750,1390, 'ground').setScale(2.5).refreshBody();// (1er étage)
+                platforms.create(750,1790, 'ground').setScale(2.5).refreshBody();// (RDC)
+                //////////////      BATIMENT CENTRAL      ////////////////////
+
+                platforms.create(2650,890, 'ground').setScale(2.5).refreshBody(); // (toit)
+                platforms.create(2950,890, 'ground').setScale(2.5).refreshBody();
+
+                platforms.create(2350,1290, 'ground').setScale(2.5).refreshBody(); // (1er étage)
+                platforms.create(2650,1290, 'ground').setScale(2.5).refreshBody();
 
 
+                platforms.create(2650,1700, 'ground').setScale(4).refreshBody(); // RDC
 
-                porte = this.physics.add.sprite(3000, 3000, 'gjfio').setScale(2).setImmovable();
+                /////////////////////   CAISSE   /////////////////////////////////
+                
+                caisse.create(1700,2250,'caisse').setScale(0.2).refreshBody() // (pile de droite)
+                caisse.create(1700,2160,'caisse').setScale(0.2).refreshBody()
+                caisse.create(1700,2080,'caisse').setScale(0.2).refreshBody()
+                caisse.create(1700,2000,'caisse').setScale(0.2).refreshBody()
+
+                caisse.create(1580,2250,'caisse').setScale(0.2).refreshBody() // (pile du milieu)
+                caisse.create(1580,2160,'caisse').setScale(0.2).refreshBody()
+                caisse.create(1580,2080,'caisse').setScale(0.2).refreshBody()
+
+                caisse.create(1380,2250,'caisse').setScale(0.2).refreshBody() // (caisse de gauche)
+
+                caisse.create(3400,1600,'caisse').setScale(0.2).refreshBody()
+                caisse.create(3400,1520,'caisse').setScale(0.2).refreshBody()
+
+                caisse.create(1900,1200,'caisse').setScale(0.2).refreshBody()
+                caisse.create(1900,1120,'caisse').setScale(0.2).refreshBody()
+                
+
+
+                porte = this.physics.add.sprite(4000, 4000, 'gjfio').setScale(2).setImmovable();
                 
                 
                 
@@ -831,6 +890,7 @@
                 player.setCollideWorldBounds(true);
                 this.physics.add.collider(player, platforms);
                 this.physics.add.collider(porte,platforms);
+                this.physics.add.collider(player,caisse);
 
                 this.cameras.main.setBounds(0, 0, 5500, 3220);
                 // ancrage de la caméra sur le joueur
@@ -917,9 +977,9 @@
                 
                 
 
-                ennemy = this.physics.add.sprite(750, 440, 'ennemy').setScale(0.5);
+                ennemy = this.physics.add.sprite(750, 750, 'ennemy').setScale(0.2);
 
-                ennemy.setSize(250, 250, true);
+                ennemy.setSize(550, 550, true);
                 this.physics.add.collider(ennemy, platforms);
                 this.physics.add.collider(player, ennemy, handlePlayerEnnemyCollision, null, this);
                 ennemy.setBounce(0.5);
@@ -927,7 +987,7 @@
                 ennemy.allowGravity = true;
                 //this.ennemy.vivant=true
 
-                Heavyennemy = this.physics.add.sprite(750, 30, 'Heavyennemy');
+                Heavyennemy = this.physics.add.sprite(1750, 1930, 'Heavyennemy').setScale(0.5);
 
                 this.physics.add.collider(Heavyennemy, platforms);
                 this.physics.add.collider(player, Heavyennemy, null, this);
@@ -979,8 +1039,12 @@
                 this.pointer=this.input.activePointer;
 
 
-            }
                 
+
+        
+                
+            }
+            
 
         
             update() {
@@ -989,8 +1053,8 @@
                     console.log(this.pointer.worldX,this.pointer.worldY)
                     }
 
-                porte.x=1500
-                porte.y=500
+                porte.x=4750
+                porte.y=2200
                 this.physics.add.collider(porte,platforms,null, this);
                 if (equipe == 'paladin sword') {
                     if (cursors.left.isDown) { //si la touche gauche est appuyée
@@ -1062,16 +1126,38 @@
                         },1000)
 
                     }
-                }
+                    
+                    var distance = Phaser.Math.Distance.Between(ennemy.x, ennemy.y, player.x, player.y);
+                    if (distance < 175) {
+                        ennemy.setVelocityX(player.x - ennemy.x)
+                        ennemy.setVelocityY(player.y - ennemy.y)
+                    }
+                    else { ennemy.setVelocity(0) }
+                    //
+                    if (Math.abs(ennemy.body.velocity.x) > Math.abs(ennemy.body.velocity.y)) {
+                        if (ennemy.body.velocity.x > 0) {
+                            console.log("droite")
+                            ennemy.anims.play('right');
+                        }
+                        if (ennemy.body.velocity.x < 0) {
+                            console.log("gauche")
+                            ennemy.anims.play('left');
+                        }
+                    }
+    
+        
+                    
+                }    
 
             }
+        
             nextscene() {
-                this.scene.start("level1")
+                this.scene.start("level3")
             }
 
-        }
+        
 
-            
+        }  
         
         class level3 extends Phaser.Scene {
             constructor() {
@@ -1099,7 +1185,7 @@
                     debug: true
                 }
             },
-            scene: [title, tuto,level1,level2,level3]
+            scene: [level2,title, tuto,level1,level3]
 
         }; new Phaser.Game(config);
     </script>
