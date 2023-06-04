@@ -22,10 +22,10 @@
             }
 
             preload() {
-                this.load.image('intro', 'assets/intro.png');
+                this.load.image('intro', 'assets/LOGO.png');
             }
             create() {
-                this.image = this.add.image(700, 400, 'intro').setScale(2.5);
+                this.image = this.add.image(700, 400, 'intro').setScale(1);
                 this.image.setInteractive()
 
                 this.image.on('pointerdown', this.onImageClicked, this);
@@ -81,8 +81,8 @@
                 this.load.spritesheet('paladin hammer','assets/sprite-paladin_marteau_01.png',
                     {frameWidth:260, frameHeight:236});
                 
-                this.load.spritesheet('ennemy', 'assets/ennemis.png',
-                    { frameWidth: 360, frameHeight: 280 });
+                this.load.spritesheet('ennemy', 'assets/Oeil.png',
+                    { frameWidth: 800, frameHeight: 600 });
 
                 this.load.spritesheet('Heavyennemy', 'assets/troll.png',
                     { frameWidth: 500, frameHeight: 550 });
@@ -211,9 +211,9 @@
                 
                 
 
-                ennemy = this.physics.add.sprite(750, 440, 'ennemy').setScale(0.5);
+                ennemy = this.physics.add.sprite(750, 440, 'ennemy').setScale(0.3);
 
-                ennemy.setSize(250, 250, true);
+                ennemy.setSize(550,500, true);
                 this.physics.add.collider(ennemy, platforms);
                 this.physics.add.collider(player, ennemy, handlePlayerEnnemyCollision, null, this);
                 ennemy.setBounce(0.5);
@@ -441,8 +441,8 @@
                 this.load.image('caisse', 'assets/caisse.png');
                 this.load.spritesheet('paladin', 'assets/sprite-paladin_05.png',
                     { frameWidth: 250, frameHeight: 239 });
-                this.load.spritesheet('ennemy', 'assets/ennemis.png',
-                    { frameWidth: 360, frameHeight: 280 });
+                this.load.spritesheet('ennemy', 'assets/Oeil.png',
+                    {frameWidth: 800, frameHeight: 600 });
                 this.load.spritesheet('Heavyennemy', 'assets/red-troll.png',
                     { frameWidth: 500, frameHeight: 550 });
                 this.load.spritesheet('epée', 'assets/epée.png',
@@ -635,9 +635,9 @@
                 
                 
 
-                ennemy = this.physics.add.sprite(250, 200, 'ennemy').setScale(0.5);
+                ennemy = this.physics.add.sprite(250, 200, 'ennemy').setScale(0.2);
 
-                ennemy.setSize(250, 250, true);
+                ennemy.setSize(550, 550, true);
                 this.physics.add.collider(ennemy, platforms);
                 this.physics.add.collider(player, ennemy, handlePlayerEnnemyCollision, null, this);
                 ennemy.setBounce(0.5);
@@ -1127,10 +1127,10 @@
 
                     }
                     
-                    var distance = Phaser.Math.Distance.Between(ennemy.x, ennemy.y, player.x, player.y);
+                    var distance = Phaser.Math.Distance.Between(ennemy.x, player.x,);
                     if (distance < 175) {
                         ennemy.setVelocityX(player.x - ennemy.x)
-                        ennemy.setVelocityY(player.y - ennemy.y)
+                        
                     }
                     else { ennemy.setVelocity(0) }
                     //
@@ -1183,9 +1183,10 @@
                 arcade: {
                     gravity: { y: 200 },
                     debug: true
+
                 }
             },
-            scene: [level2,title, tuto,level1,level3]
+            scene: [title, tuto,level1,level2,level3]
 
         }; new Phaser.Game(config);
     </script>
